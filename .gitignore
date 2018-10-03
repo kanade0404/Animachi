@@ -1,0 +1,5 @@
+venv/
+.idea/
+animachi/animachi/__pycache__/
+animachi/animachi/api/__pycache__/
+animachi/animachi/api/migrations/
