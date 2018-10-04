@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
-import { Anime } from '../models/anime';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnimeService {
+export class RatingService {
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  getAnimes(): Observable<any> {
-    return this.http.get(this.baseUrl + 'anime/', this.getAuthHeaders());
-  }
-  addAnime(anime: Anime): Observable<any> {
-    return this.http.post(this.baseUrl + 'anime/', anime, this.getAuthHeaders());
-  }
-  editAnime(anime: Anime, id: number): Observable<any> {
-    return this.http.put(this.baseUrl + 'anime/' + id + '/', anime, this.getAuthHeaders());
-  }
-  deleteAnime(id: number): Observable<any> {
-    return this.http.delete(this.baseUrl + 'anime/' + id + '/', this.getAuthHeaders());
+  addRating(user_id: number, anime_id: number, rating: number): Observable<any> {
+    const body = {
+      user: user_id,
+      anime: anime_id,
+      stars: rating,
+    };
+    return this.http.post(this.baseUrl + 'ratings/rate_anime/', body, this.getAuthHeaders());
   }
 
   private getAuthHeaders() {

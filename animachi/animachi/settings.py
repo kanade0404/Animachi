@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from animachi.config import db_config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -64,6 +65,22 @@ CORS_ORIGIN_WHITELIST = (
 
 ROOT_URLCONF = 'animachi.urls'
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 WSGI_APPLICATION = 'animachi.wsgi.application'
 
 
@@ -73,11 +90,11 @@ WSGI_APPLICATION = 'animachi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'animachi',
-        'USER': 'p_seiya',
-        'PASSWORD': 'psql_seiya',
-        'HOST': '127.0.0.1',
-        'POST': ''
+        'NAME': db_config.DB_NAME,
+        'USER': db_config.DB_USER_NAME,
+        'PASSWORD': db_config.DB_PASSWORD,
+        'HOST': db_config.HOST,
+        'POST': db_config.POST_NUMBER
     }
 }
 

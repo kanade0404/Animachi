@@ -21,6 +21,6 @@
     Login
   </button>
 </form>
-
+<mat-spinner *ngIf="loading"></mat-spinner>
 <br>
 <a [routerLink]="['/register']">Don`t have an account? Register here.</a>
