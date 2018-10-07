@@ -4,9 +4,11 @@ import { Routes } from "@angular/router";
 
 import { ItemsComponent } from "./item/items.component";
 import { ItemDetailComponent } from "./item/item-detail.component";
+
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
-import { InputAnimeComponent } from './input-anime/input-anime.component';
+import { InputAnimeComponent } from "~/input-anime/input-anime.component";
+
 
 const routes: Routes = [
     { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -14,7 +16,7 @@ const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: "register", component: RegisterComponent },
     { path: "item/:id", component: ItemDetailComponent },
-    { path: "input/:id", component: InputAnimeComponent },
+    { path: "input/:id", component: InputAnimeComponent }
 ];
 
 @NgModule({

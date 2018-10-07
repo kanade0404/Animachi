@@ -26,7 +26,10 @@ SECRET_KEY = 'mbvd6u_3g=%o@&l9#_nf(0(ou)(z_&@-tpwys7s@!ob@23sc49'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '10.0.2.2'
+]
 
 
 # Application definition

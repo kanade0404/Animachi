@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { AnimeService } from "../services/anime.service";
+import { AnimeService } from "~/services/anime.service";
 import { RouterExtensions } from "nativescript-angular/router";
 import { TNSFontIconService } from "nativescript-ngx-fonticon";
-import { RatingService } from "../services/rating.service";
-import { User } from "../models/user";
+import { RatingService } from "~/services/rating.service";
+import { User } from "~/models/user";
 import { Subscription } from "rxjs";
-import { GlobalService } from "../services/global.service";
+import { GlobalService } from "~/services/global.service";
 
 @Component({
     selector: "ns-details",
@@ -33,7 +33,6 @@ export class ItemDetailComponent implements OnInit {
         this.userSub = this.global.user.subscribe(
             me => this.account = me
         );
-        this.yourRate = 0;
         const id = +this.route.snapshot.params["id"];
         this.animeService.getAnime(id).subscribe(
             anime => {
@@ -44,29 +43,28 @@ export class ItemDetailComponent implements OnInit {
             }
         );
     }
-    editClicked(){
+    editClicked() {
         this.router.navigate(['/input', this.item.id]);
     }
-    deleteClicked(){
+    deleteClicked() {
         this.animeService.deleteAnime(this.item.id).subscribe(
-            movie => {
-                this.router.navigate(['/items'], { clearHistory: true });
+            anime => {
+                this.router.navigate(['/items'], {clearHistory: true});
             },
             error => {
                 console.log('error', error);
             }
         );
     }
-    rateClicked(rate){
+    rateClicked(rate: number) {
         this.yourRate = rate;
         this.ratingService.addRating(this.account.id, this.item.id, this.yourRate).subscribe(
-            data => {
-                this.item = data['result'];
+            anime => {
+                this.item = anime['result'];
             },
             error => {
-                console.log(error);
+                console.log('error', error);
             }
-            
-        )
+        );
     }
 }

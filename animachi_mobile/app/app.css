@@ -12,4 +12,15 @@ refer to http://docs.nativescript.org/ui/theme.
 @import '~nativescript-theme-core/css/core.light.css';
 .fa {
     font-family: FontAwesome, fontawesome-webfont;
-  }
+    font-size: 48px;
+    margin: 10px;
+}
+.red {
+    color: red;
+}
+.smallerIcon {
+    font-size: 32px;
+}
+.yellow {
+    color: yellow;
+}

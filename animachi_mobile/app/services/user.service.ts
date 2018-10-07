@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment.prod';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,9 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   loginUser(userData: any): Observable<any> {
-    return this.http.post(this.baseUrl + 'authenticate/', userData, {headers: this.httpHeaders});
+    return this.http.post(this.baseUrl + 'authenticate/', userData);
   }
   registerUser(userData: any): Observable<any> {
-    return this.http.post(this.baseUrl + 'users/', userData, {headers: this.httpHeaders});
+    return this.http.post(this.baseUrl + 'users/', userData);
   }
 }

@@ -12,13 +12,13 @@ export class RatingService {
 
   constructor(private http: HttpClient) { }
 
-  addRating(user_id: number, movie_id: number, rating: number): Observable<any> {
+  addRating(user_id: number, anime_id: number, rating: number): Observable<any> {
     const body = {
       user: user_id,
-      movie: movie_id,
+      anime: anime_id,
       stars: rating,
     };
-    return this.http.post(this.baseUrl + 'ratings/rate_movie/', body, this.getAuthHeaders());
+    return this.http.post(this.baseUrl + 'ratings/rate_anime/', body, this.getAuthHeaders());
   }
 
   private getAuthHeaders() {

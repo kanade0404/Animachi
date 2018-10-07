@@ -2,17 +2,19 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
-import { HttpClientModule } from "@angular/common/http";
+import { NativeScriptUIDataFormModule } from 'nativescript-pro-ui/dataform/angular';
+
+import { HttpClientModule } from '@angular/common/http';
 
 import { ItemService } from "./item/item.service";
 import { ItemsComponent } from "./item/items.component";
 import { ItemDetailComponent } from "./item/item-detail.component";
 
-import { InputAnimeComponent } from './input-anime/input-anime.component';
-import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
+import { InputAnimeComponent } from './input-anime/input-anime.component';
 
-import { GlobalService } from "~/services/global.service";
+import { GlobalService } from "./services/global.service";
 import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
@@ -29,17 +31,18 @@ import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
         HttpClientModule,
         NativeScriptModule,
         AppRoutingModule,
+        NativeScriptUIDataFormModule,
         TNSFontIconModule.forRoot({
-            'fa': './asssets/fontawesome.css'
+            'fa': './assets/fontawesome.css'
         })
     ],
     declarations: [
         AppComponent,
         ItemsComponent,
-        ItemDetailComponent,
         LoginComponent,
         RegisterComponent,
-        InputAnimeComponent
+        InputAnimeComponent,
+        ItemDetailComponent
     ],
     providers: [
         GlobalService,
