@@ -11,25 +11,29 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from animachi.config import db_config
+from decouple import config
+from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mbvd6u_3g=%o@&l9#_nf(0(ou)(z_&@-tpwys7s@!ob@23sc49'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+DEBUG = False
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    '10.0.2.2'
+    'animachi.herokuapp.com'
+    # '127.0.0.1',
+    # '10.0.2.2'
 ]
+
+SECRET_KEY = config('SECRETE_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 # Application definition
@@ -90,17 +94,9 @@ WSGI_APPLICATION = 'animachi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': db_config.DB_NAME,
-        'USER': db_config.DB_USER_NAME,
-        'PASSWORD': db_config.DB_PASSWORD,
-        'HOST': db_config.HOST,
-        'POST': db_config.POST_NUMBER
-    }
-}
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
+DATABASE = {'default': config('DATABASE_URL', default=default_dburl, cast=dburl)}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

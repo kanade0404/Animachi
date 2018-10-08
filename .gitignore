@@ -3,4 +3,4 @@ venv/
 animachi/animachi/__pycache__/
 animachi/animachi/api/__pycache__/
 animachi/animachi/api/migrations/
-animachi/animachi/config/
+animachi/animachi/local_settings.py
