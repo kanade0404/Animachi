@@ -15,25 +15,37 @@ from decouple import config
 from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+#
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-DEBUG = False
-try:
-    from .local_settings import *
-except ImportError:
-    pass
-if not DEBUG:
-    import django_heroku
-    django_heroku.settings(locals())
+# DEBUG = False
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
+# if not DEBUG:
+#     import django_heroku
+#     django_heroku.settings(locals())
 
 ALLOWED_HOSTS = [
     'animachi.herokuapp.com'
-    # '127.0.0.1',
-    # '10.0.2.2'
 ]
 
 SECRET_KEY = config('SECRETE_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': '127.0.0.1',
+        'POST': ''
+    }
+}
 
 # Application definition
 
@@ -93,9 +105,9 @@ WSGI_APPLICATION = 'animachi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-
-DATABASE = {'default': config('DATABASE_URL', default=default_dburl, cast=dburl)}
+# default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+#
+# DATABASE = {'default': config('DATABASE_URL', default=default_dburl, cast=dburl)}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
