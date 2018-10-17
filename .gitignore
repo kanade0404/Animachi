@@ -1,6 +1,6 @@
 venv/
 .idea/
-animachi/.env
+*/.env
 animachi/animachi/__pycache__/
 animachi/animachi/api/__pycache__/
 animachi/animachi/api/migrations/
