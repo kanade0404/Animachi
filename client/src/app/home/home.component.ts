@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('token') && localStorage.getItem('account')) {
       this.global.me = JSON.parse(localStorage.getItem('account'));
       this.getAnimes();
+      this.global.isLoggedIn = true;
     } else {
       this.router.navigate(['/login']);
     }
@@ -137,6 +138,7 @@ export class HomeComponent implements OnInit {
   }
   logoutClicked() {
     this.global.me = new User();
+    this.global.isLoggedIn = false;
     localStorage.removeItem('token');
     localStorage.removeItem('account');
     this.router.navigate(['/login']);

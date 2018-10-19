@@ -33,6 +33,7 @@ loading: boolean;
     this.userService.loginUser(this.userLogin.value).subscribe(
       response => {
         this.loading = false;
+        this.global.isLoggedIn = true;
         localStorage.setItem('token', response['token']);
         this.global.me = response['user'];
         this.router.navigate(['/home']);
@@ -41,7 +42,6 @@ loading: boolean;
         this.loading = false;
         console.log('error', error);
       }
-    ),
-    console.log(this.userLogin.value);
+    )
   }
 }

@@ -1,6 +1,9 @@
 <p>
   Welcome {{ account.username }}
 </p>
+<button mat-ripple mat-raised-button (click)="addAnimeClicked()" color="accent">
+    Add New
+</button>
 <button mat-ripple mat-raised-button type="submit" color="accent" (click)="logoutClicked()">
     Logout
 </button>
@@ -10,54 +13,52 @@
   <div *ngFor="let anime of animes;" (click)="animeClicked(anime)" class="animeClickable">
     <h4>{{ anime.title }}</h4>
   </div>
-  <button mat-ripple mat-raised-button (click)="addAnimeClicked()" color="accent">
-      Add New
-  </button>
-</div>
-<div class="container">
-  <div *ngIf="selectedAnime && !selecterAnime">
-    <h2>Details:</h2>
-    <h4>{{ selectedAnime.title }}</h4>
-    <p>{{ selectedAnime.description }}</p>
-    <ngb-rating [rate]="selectedAnime.avg_rating" (hove)="hovered=$event" (leave)="hovered=0" [readonly]="true" max="5"></ngb-rating>
-    ({{ selectedAnime.no_of_ratings }})
-    <br>
-    <button mat-ripple mat-raised-button (click)="editAnimeClicked()" color="accent">
-        Edit Anime
-    </button>
-    <button mat-ripple mat-raised-button (click)="deleteAnimeClicked()" color="warn">
-        Remove Anime
-    </button>
-    <h3>Rate it:</h3>
-    <ngb-rating [rate]="my_rating" (hover)="hovered=$event" max="5" (rateChange)="newRate($event)"></ngb-rating>
-  </div>
-  <div *ngIf="isAddEditMode">
-    <h2>
-      <span *ngIf="isEdit">Edit</span>
-      <span *ngIf="!isEdit">New</span>
-      Anime:
-    </h2>
-      <form (ngSubmit)="submitAnime()" [formGroup]="animeInput">
-          <div class="form-group">
-            <mat-form-field class="example-full-with">
-              <input matInput placeholder="Title" formControlName="title">
-              <mat-error *ngIf="animeInput.get('title').hasError('required')">
-                  Title is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field class="exapmle-full-width">
-              <textarea matInput placeholder="Description" formControlName="description"></textarea>
-              <mat-error *ngIf="animeInput.get('description').hasError('required')">
-                Description is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-            <button mat-ripple mat-raised-button type="submit" [disabled]="animeInput.invalid || loading">
-              Save
-            </button>
-            <br>
-            <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
-          </div>
-        </form>
-  </div>
+<!-- </div>
+<div class="container"> -->
+    <div *ngIf="selectedAnime && !selecterAnime">
+        <h2>Details:</h2>
+        <h4>{{ selectedAnime.title }}</h4>
+        <p>{{ selectedAnime.description }}</p>
+        <ngb-rating [rate]="selectedAnime.avg_rating" (hove)="hovered=$event" (leave)="hovered=0" [readonly]="true" max="5"></ngb-rating>
+        ({{ selectedAnime.no_of_ratings }})
+        <br>
+        <button mat-ripple mat-raised-button (click)="editAnimeClicked()" color="accent">
+            Edit Anime
+        </button>
+        <button mat-ripple mat-raised-button (click)="deleteAnimeClicked()" color="warn">
+            Remove Anime
+        </button>
+        <h3>Rate it:</h3>
+        <ngb-rating [rate]="my_rating" (hover)="hovered=$event" max="5" (rateChange)="newRate($event)"></ngb-rating>
+      </div>
+      <div *ngIf="isAddEditMode">
+        <h2>
+          <span *ngIf="isEdit">Edit</span>
+          <span *ngIf="!isEdit">New</span>
+          Anime:
+        </h2>
+          <form (ngSubmit)="submitAnime()" [formGroup]="animeInput">
+              <div class="form-group">
+                <mat-form-field class="example-full-with">
+                  <input matInput placeholder="Title" formControlName="title">
+                  <mat-error *ngIf="animeInput.get('title').hasError('required')">
+                      Title is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="exapmle-full-width">
+                  <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                  <mat-error *ngIf="animeInput.get('description').hasError('required')">
+                    Description is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <button mat-ripple mat-raised-button type="submit" [disabled]="animeInput.invalid || loading">
+                  Save
+                </button>
+                <br>
+                <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+              </div>
+            </form>
+      </div>
+  
 </div>

@@ -7,7 +7,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class GlobalService {
-
+  isLoggedIn: boolean = false;
   private userSource = new BehaviorSubject<User>(new User());
   user = this.userSource.asObservable();
   set me(user: User) {
