@@ -8,44 +8,15 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
+共通設定
 """
 
 import os
-from decouple import config
-from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-#
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# DEBUG = False
-# try:
-#     from .local_settings import *
-# except ImportError:
-#     pass
-# if not DEBUG:
-#     import django_heroku
-#     django_heroku.settings(locals())
-
-ALLOWED_HOSTS = [
-    'animachi.herokuapp.com'
-]
-
-SECRET_KEY = config('SECRETE_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config("DB_PASSWORD"),
-        'HOST': '127.0.0.1',
-        'POST': ''
-    }
-}
 
 # Application definition
 
@@ -83,31 +54,23 @@ CORS_ORIGIN_WHITELIST = (
 
 ROOT_URLCONF = 'animachi.urls'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 WSGI_APPLICATION = 'animachi.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-#
-# DATABASE = {'default': config('DATABASE_URL', default=default_dburl, cast=dburl)}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'animachi',
+        'USER': 'animachi_admin',
+        'PASSWORD': 'kanadeanimachi44',
+        'HOST': '127.0.0.1',
+        'POST': ''
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
