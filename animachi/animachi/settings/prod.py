@@ -23,6 +23,8 @@ ALLOWED_HOSTS = [
     'animachi.herokuapp.com',
 ]
 
+default_dburl = config('CLEARDB_DATABASE_URL')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -30,6 +32,6 @@ DATABASES = {
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('HOST'),
-        'POST': ''
+        'POST': '5432'
     }
 }

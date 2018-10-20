@@ -1,7 +1,8 @@
 venv/
 .idea/
-animachi/animachi/.env
-animachi/animachi/settings/
+animachi/.env
+animachi/animachi/settings/dev.py
+animachi/animachi/settings/__pycache__/
 animachi/animachi/__pycache__/
 animachi/animachi/api/__pycache__/
 animachi/animachi/api/migrations/
