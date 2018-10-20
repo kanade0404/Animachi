@@ -1,1 +1,4 @@
-animachi/settings/
+animachi/settings/dev.py
+.gitignore
+.idea/
+venv/include/
