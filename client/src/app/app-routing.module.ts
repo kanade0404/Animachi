@@ -4,12 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { AnimeDetailComponent } from './anime-detail/anime-detail.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'anime/{id}', component: AnimeDetailComponent },
+  { path: 'user/:id', component: UserDetailComponent}
 ];
 
 @NgModule({

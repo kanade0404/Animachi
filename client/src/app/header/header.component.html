@@ -1,20 +1,19 @@
 <mat-toolbar color="primary">
-  <a routerLink="/home"><span>あにまち</span></a>
+  
+  <a routerLink="/home">
+    <img src="../../assets/1_Primary_logo_on_transparent_325x63.png" alt="">
+  </a>
   <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-icon" *ngIf="globalService.isLoggedIn">
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="clickedProfile()">
     <mat-icon>account_circle</mat-icon>
     <span>プロフィール</span>
   </button>
   <button mat-menu-item>
     <mat-icon>settings</mat-icon>
     <span>設定</span>
-  </button>
-  <button mat-menu-item (click)="closeMenu()">
-    <mat-icon>close</mat-icon>
-    <span>閉じる</span>
   </button>
 </mat-menu>

@@ -19,4 +19,7 @@ export class UserService {
   registerUser(userData: any): Observable<any> {
     return this.http.post(this.baseUrl + 'users/', userData, {headers: this.httpHeaders});
   }
+  getUserById(id): Observable<any>{
+    return this.http.get(this.baseUrl + 'users/' + id + '/', {headers: this.httpHeaders});
+  }
 }

@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   isEdit: boolean;
   loading: boolean;
   my_rating: number;
+  isFavorited: boolean[];
 
   constructor(private fb: FormBuilder, private global: GlobalService, private router: Router,
      private animeService: AnimeService, public snackBar: MatSnackBar, private ratingService: RatingService) { }
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
     this.isAddEditMode = false;
     this.isEdit = false;
     this.loading = false;
+    this.isFavorited = [false];
     this.animeInput = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required]
@@ -69,6 +71,10 @@ export class HomeComponent implements OnInit {
       title: [this.selectedAnime.title, Validators.required],
       description: [this.selectedAnime.description, Validators.required]
     });
+  }
+  closeEditFormClicked() {
+    this.isEdit = false;
+    this.isAddEditMode = false;
   }
   addAnimeClicked() {
     this.isEdit = false;
@@ -136,6 +142,19 @@ export class HomeComponent implements OnInit {
       error => this.snackBar.open('Error. Please Try Again.', '', {duration: 3000 })
     );
   }
+
+  // お気に入りボタン（とりあえず）
+  clickedFavorite(id){
+    console.log(this.animes[id])
+    if(this.isFavorited[id]){
+      this.isFavorited[id] = false;
+      console.log('false')
+    }else{
+      this.isFavorited[id] = true;
+      console.log('true')
+    }
+  }
+
   logoutClicked() {
     this.global.me = new User();
     this.global.isLoggedIn = false;

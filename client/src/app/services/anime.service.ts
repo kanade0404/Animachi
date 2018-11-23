@@ -16,6 +16,9 @@ export class AnimeService {
   getAnimes(): Observable<any> {
     return this.http.get(this.baseUrl + 'anime/', this.getAuthHeaders());
   }
+  getAnimeById(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + 'anime/' + id, this.getAuthHeaders());
+  }
   addAnime(anime: Anime): Observable<any> {
     return this.http.post(this.baseUrl + 'anime/', anime, this.getAuthHeaders());
   }
