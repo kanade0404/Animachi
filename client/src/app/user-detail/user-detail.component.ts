@@ -5,6 +5,7 @@ import { GlobalService } from '../services/global.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-detail',
@@ -16,8 +17,11 @@ export class UserDetailComponent implements OnInit {
   account: User = new User();
   userSub: Subscription;
   user: User = new User();
+  userInput: FormGroup;
+  selectedUser;
+  isEdit: boolean;
 
-  constructor(private global: GlobalService, private router: Router, private userService: UserService,
+  constructor(private fb: FormBuilder, private global: GlobalService, private router: Router, private userService: UserService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -33,19 +37,43 @@ export class UserDetailComponent implements OnInit {
     }else{
       this.router.navigate(['/login']);
     }
+    this.userInput = this.fb.group({
+      username: ['', Validators.required],
+      email: [ '', Validators.compose([Validators.required, Validators.email])]
+    });
+    this.isEdit = false;
   }
   getUser(id){
-    console.log('id', id)
     this.userService.getUserById(id).subscribe(
       response => {
         this.user = response;
-        console.log('response', response);
-        console.log('user', this.user);
+        this.selectedUser = response;
       },
       error => {
-        console.log('error', error)
         this.snackBar.open('Error getting User', '', {duration: 3000});
       }
     );
+  }
+  editUserClicked(){
+    this.isEdit = true;
+    this.userInput = this.fb.group({
+      username: [this.selectedUser.username, Validators.required],
+      email: [this.selectedUser.email, Validators.compose([Validators.required, Validators.email])]
+    });
+  }
+  submitUser(){
+    this.userService.editUser(this.userInput.value, this.account.id).subscribe(
+      response => {
+        this.user = response;
+        this.userInput.reset();
+        this.isEdit = false;
+      },
+      error => {
+        this.snackBar.open('Error edit User', '', {duration: 3000});
+      }
+    )
+  }
+  closeEditFormClicked(){
+    this.isEdit = false;
   }
 }

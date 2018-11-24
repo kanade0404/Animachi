@@ -1,14 +1,60 @@
-<p>
-  user-detail works!
-</p>
-<div>
-  <mat-card>
-    <mat-card-header>
-      {{ user.username }}
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ user.id }}</p>
-      <p>{{ user.email }}</p>
-    </mat-card-content>
+<div class="container">
+  <mat-card class="userinfo-card" [ngClass]="{'invisible': isEdit}">
+    <mat-list>
+      <h2>ユーザー情報</h2>
+      <div class="userinfo-content">
+        <mat-list-item>
+          <mat-icon mat-list-icon>account_box</mat-icon>
+          <h3 mat-line>{{ user.username }}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>mail_outline</mat-icon>
+          <h3 mat-line>{{ user.email }}</h3>
+        </mat-list-item>
+        <button mat-ripple mat-raised-button color="primary" (click)="editUserClicked()">
+          編集
+        </button>
+      </div>
+    </mat-list>
+  </mat-card>
+  <mat-card class="userinfo-card" [ngClass]="{'invisible': !isEdit}">
+    <mat-list>
+        <h2>ユーザー情報</h2>
+        <div class="userinfo-form">
+            <form (ngSubmit)="submitUser()" [formGroup]="userInput">
+              <div class="form-group">
+                <mat-list-item>
+                    <mat-icon mat-list-icon>account_box</mat-icon>
+                    <mat-form-field>
+                        <input matInput placeholder="UsreName" formControlName="username">
+                        <mat-error *ngIf="userInput.get('username').hasError(required)">
+                          <strong>ユーザー名は必須です。</strong>
+                        </mat-error>
+                      </mat-form-field>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>mail_outline</mat-icon>
+                    <mat-form-field>
+                        <input matInput placeholder="Email" formControlName="email">
+                        <mat-error *ngIf="userInput.get('email').hasError(required)">
+                          <strong>メールアドレスは必須です。</strong>
+                        </mat-error>
+                        <mat-error *ngIf="userInput.get('email').hasError(email) && !userInput.get('email').hasError(required)">
+                          <strong>メールアドレスの形式が不正です。</strong>
+                        </mat-error>
+                      </mat-form-field>
+                </mat-list-item>
+                <button mat-ripple mat-raised-button color="primary" type="submit" [disabled]="userInput.invalid || loading">
+                  更新
+                </button>
+                <button mat-ripple mat-raised-button (click)="closeEditFormClicked()">
+                  キャンセル
+                </button>
+                <br>
+                <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+              </div>
+            </form>
+          </div>
+    </mat-list>
   </mat-card>
 </div>

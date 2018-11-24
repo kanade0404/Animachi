@@ -1,0 +1,17 @@
+.container{
+    width: 80%;
+    position: relative;
+}
+mat-card{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.userinfo-card{
+    max-width: 100%;
+}
+mat-list{
+    margin: 0 auto;
+}
+.invisible{
+    display: none;
+}

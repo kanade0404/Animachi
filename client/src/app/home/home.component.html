@@ -1,11 +1,11 @@
 <p>
-  Welcome {{ account.username }}
+  ようこそ！ {{ account.username }}さん！
 </p>
 <button mat-ripple mat-raised-button (click)="addAnimeClicked()" color="accent">
-    Add New
+    追加
 </button>
 <button mat-ripple mat-raised-button type="submit" color="accent" (click)="logoutClicked()">
-    Logout
+    ログアウト
 </button>
 <br>
 <div *ngIf="selectedAnime && !selecterAnime">
@@ -16,39 +16,39 @@
   ({{ selectedAnime.no_of_ratings }})
   <br>
   <button mat-ripple mat-raised-button (click)="editAnimeClicked()" color="accent">
-    Edit Anime
+    編集
   </button>
   <button mat-ripple mat-raised-button (click)="deleteAnimeClicked()" color="warn">
-    Remove Anime
+    削除
   </button>
-  <h3>Rate it:</h3>
+  <h3>評価</h3>
   <ngb-rating [rate]="my_rating" (hover)="hovered=$event" max="5" (rateChange)="newRate($event)"></ngb-rating>
 </div>
 <div *ngIf="isAddEditMode">
   <h2>
-    <span *ngIf="isEdit">Edit</span>
-    <span *ngIf="!isEdit">New</span>
-    Anime:
+    <span *ngIf="isEdit">編集</span>
+    <span *ngIf="!isEdit">新規</span>
+    アニメ:
   </h2>
   <form (ngSubmit)="submitAnime()" [formGroup]="animeInput">
     <div class="form-group">
       <mat-form-field class="example-full-with">
         <input matInput placeholder="Title" formControlName="title">
         <mat-error *ngIf="animeInput.get('title').hasError('required')">
-          Title is <strong>required</strong>
+          <strong>タイトルは必須です</strong>
         </mat-error>
       </mat-form-field>
       <br>
       <mat-form-field class="exapmle-full-width">
         <textarea matInput placeholder="Description" formControlName="description"></textarea>
         <mat-error *ngIf="animeInput.get('description').hasError('required')">
-          Description is <strong>required</strong>
+          <strong>本文がありません</strong>
         </mat-error>
       </mat-form-field>
       <button mat-ripple mat-raised-button color="primary" type="submit" [disabled]="animeInput.invalid || loading">
-        Save
+        保存
       </button>
-      <button mat-ripple mat-raised-button (click)="closeEditFormClicked()">Cancel</button>
+      <button mat-ripple mat-raised-button (click)="closeEditFormClicked()">キャンセル</button>
       <br>
       <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
     </div>

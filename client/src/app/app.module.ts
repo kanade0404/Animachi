@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 
 import { NgbModule　} from '@ng-bootstrap/ng-bootstrap';
 
@@ -52,6 +53,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     MatToolbarModule,
     MatMenuModule,
     MatCardModule,
+    MatListModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     ReactiveFormsModule
